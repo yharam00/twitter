@@ -29,7 +29,7 @@ const EditProfilePicViewModeBase = (props: WithFirebaseApiProps & {
   return (
     <Stack direction="row" spacing={2}>
       <Typography variant="body1" align="left" sx={{ marginTop: "auto", marginBottom: "auto" }}>
-        Profile Pic:
+        프로필 사진:
       </Typography>
       {profilePic}
       <IconButton onClick={() => props.onEditClick()}>
@@ -69,11 +69,11 @@ const EditProfilePicEditModeBase = (props: WithFirebaseApiProps & {
   return (
     <Stack direction="row" spacing={2}>
       <Typography variant="body1" align="left" sx={{ marginTop: "auto", marginBottom: "auto" }}>
-        Profile Pic:
+        프로필 사진:
       </Typography>
       {profilePic}
       <Button variant="contained" component="label">
-        Select Image
+        사진 찾기
         <input hidden accept="image/*" onChange={(e) => {
           const files = e.target.files;
           if (files == null || files.length === 0) {
@@ -94,7 +94,7 @@ const EditProfilePicEditModeBase = (props: WithFirebaseApiProps & {
             userInfo: { profilePicHandle: handle },
           }))
         }}
-      >SUBMIT</Button>
+      >제출</Button>
     </Stack>
   )
 };
@@ -163,7 +163,7 @@ const EditUsernameEditModeBase = (props: WithFirebaseApiProps & {
             userInfo: { username: username },
           }))
         }}
-      >SUBMIT</Button>
+      >제출</Button>
     </Stack>
   )
 };
@@ -191,8 +191,8 @@ const EditProfileBase = (props: WithFirebaseApiProps) => {
   const userInfo = useAppSelector((state: RootState) => state.user.userInfo.value);
 
   return (<>
-    <Typography variant="h2" component="div" align="left">
-      Edit Profile
+    <Typography variant="h4" component="div" align="left">
+      내 정보 수정
     </Typography>
     <EditUsername userId={userId!} userInfo={userInfo!} />
     <EditProfilePic userId={userId!} userInfo={userInfo!} />

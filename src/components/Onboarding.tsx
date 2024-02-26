@@ -30,7 +30,7 @@ const OnboardingBase = (props: WithFirebaseApiProps) => {
       </Stack>
       {selectedProfilePic}
       <Button variant="contained" component="label">
-        Upload
+        사진 찾기
         <input hidden accept="image/*" onChange={(e) => {
           const files = e.target.files;
           if (files == null || files.length === 0) {
@@ -55,7 +55,7 @@ const OnboardingBase = (props: WithFirebaseApiProps) => {
           }))
         }}
         disabled={file === null || username.length === 0}
-      >SUBMIT</Button>
+      >제출</Button>
     </>);
   }
   
