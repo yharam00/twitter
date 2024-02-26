@@ -5,6 +5,10 @@ import { store } from './redux/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import {
+  FirebaseApi,
+  FirebaseContext,
+} from "./Firebase";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -12,7 +16,9 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <FirebaseContext.Provider value={new FirebaseApi()}>
+        <App />
+      </FirebaseContext.Provider>
     </Provider>
   </React.StrictMode>
 );
