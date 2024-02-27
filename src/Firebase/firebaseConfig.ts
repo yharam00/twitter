@@ -1,10 +1,10 @@
 export const firebaseConfig = {
-    apiKey: "AIzaSyB7okWc09GiuRQ2RQ65Tvy0wqT29kD6cXY",
-    authDomain: "my-login-app-8d339.firebaseapp.com",
-    projectId: "my-login-app-8d339",
-    storageBucket: "my-login-app-8d339.appspot.com",
-    messagingSenderId: "964765511597",
-    appId: "1:964765511597:web:09d29c5207b19a02cffb24",
-    measurementId: "G-Q84ZLMLN23"
+    apiKey: "AIzaSyDHUe2BFP4Znd5fg8MsVbjNbg_hkrI_a58",
+    authDomain: "twitter-4cdd2.firebaseapp.com",
+    projectId: "twitter-4cdd2",
+    storageBucket: "twitter-4cdd2.appspot.com",
+    messagingSenderId: "794790114530",
+    appId: "1:794790114530:web:36485161a1d91642c7dabb",
+    measurementId: "G-SRX79YK841"
 };
     
