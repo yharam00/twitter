@@ -2,7 +2,7 @@ import { Box, CircularProgress, Container, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import Header from './components/Header';
 import Onboarding from './components/Onboarding';
-import EditProfile from './components/EditProfile'
+import MainFeed from './components/MainFeed';
 import { WithFirebaseApiProps, withFirebaseApi } from './Firebase';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { RootState } from './redux/store';
@@ -41,10 +41,7 @@ const Body = () => {
   }
   return (
     <Routes>
-      <Route path="/" element={<>
-        <Typography whiteSpace={'pre-wrap'}>{`안녕하세요 ${userInfo.username}님 😀 \nharamy login app에 오신걸 환영합니다.`}</Typography>
-        <EditProfile />
-      </>} />
+      <Route path="/" element={<MainFeed />} />
     </Routes>
   );
 };

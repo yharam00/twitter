@@ -12,9 +12,9 @@ import {
     Unsubscribe,
     User
 } from "firebase/auth";
-import { doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, Firestore, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { FirebaseStorage, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { UserInfo } from "../types";
+import { Tweet, UserInfo } from "../types";
     
 
 export default class FirebaseApi {
@@ -77,5 +77,17 @@ export default class FirebaseApi {
     asyncGetURLFromHandle = async (handle: string): Promise<string> => {
         const url = await getDownloadURL(ref(this.storage, handle));
         return url;
-      }
+    };
+
+    asyncCreateTweet = async (userId: string, tweetContent: string) => {
+      const impl = async (tweet: Tweet) => {
+        return await addDoc(collection(this.firestore, "tweets"), tweet);
+      };
+      const tweetRef = await impl({
+        tweetContent: tweetContent,
+        createdTime: Math.floor(Date.now() / 1000),
+        userId: userId,
+      });
+      return tweetRef.id;
+    };
 };
