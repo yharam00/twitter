@@ -7,6 +7,11 @@ import { WithFirebaseApiProps, withFirebaseApi } from './Firebase';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { RootState } from './redux/store';
 import { handleUserChange } from './redux/userSlice';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 const isLoadingState = (state: RootState): boolean => {
   return state.user.userId === undefined;
@@ -35,10 +40,12 @@ const Body = () => {
     return <Onboarding />;
   }
   return (
-    <>
-      <Typography whiteSpace={'pre-wrap'}>{`안녕하세요 ${userInfo.username}님 😀 \nharamy login app에 오신걸 환영합니다.`}</Typography>
-      <EditProfile />
-    </>
+    <Routes>
+      <Route path="/" element={<>
+        <Typography whiteSpace={'pre-wrap'}>{`안녕하세요 ${userInfo.username}님 😀 \nharamy login app에 오신걸 환영합니다.`}</Typography>
+        <EditProfile />
+      </>} />
+    </Routes>
   );
 };
 
@@ -61,14 +68,14 @@ const App = (props: WithFirebaseApiProps) => {
   }
 
   return (
-    <>
+    <BrowserRouter>
       <Header />
       <Container sx={{ paddingTop: 3 }}>
         <Box sx={{ margin: "auto" }}>
           <Body />
         </Box>
       </Container>
-    </>
+    </BrowserRouter>
   );
 }
 
