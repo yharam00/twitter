@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Onboarding from './components/Onboarding';
 import MainFeed from './components/MainFeed';
 import ExploreFeed from './components/ExploreFeed';
+import ProfilePage from './components/ProfilePage';
 import { WithFirebaseApiProps, withFirebaseApi } from './Firebase';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { RootState } from './redux/store';
@@ -44,6 +45,7 @@ const Body = () => {
     <Routes>
       <Route path="/" element={<MainFeed />} />
       <Route path="/explore" element={<ExploreFeed />} />
+      <Route path="/user/:userId" element={<ProfilePage />} />
     </Routes>
   );
 };

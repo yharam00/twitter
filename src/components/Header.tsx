@@ -15,6 +15,9 @@ const HeaderBase = (
   const logoutButton = (
     <Button color="inherit" onClick={props.firebaseApi.signOut}>Log out</Button>
   );
+  const profileButton = currentUserId == null ? null : (
+    <Button component={Link} to={'/user/' + currentUserId} color="inherit">Profile</Button>
+  );
   const button = currentUserId == null ? loginWithGoogleButton : logoutButton;
   return (
     <AppBar position="static">
@@ -23,6 +26,8 @@ const HeaderBase = (
         <Button component={Link} to={'/'} color="inherit">Twitter</Button>
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
+        <Button component={Link} to={'/explore'} color="inherit">Explore</Button>
+        {profileButton}
         {button}
       </Toolbar>
     </AppBar>

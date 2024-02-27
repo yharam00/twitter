@@ -114,4 +114,46 @@ export const handleUserChange =
       dispatch(asyncGetUserInfo({ firebaseApi, userId }));
     };
 
+    export const handleFollow = (
+      firebaseApi: FirebaseApi,
+      userId: string,
+      targetUserId: string,
+    ): AppThunk => (dispatch, getState) => {
+      const userInfo = getState().user.userInfo.value;
+      if (userInfo == null) {
+        return;
+      }
+      if (userInfo.following.includes(targetUserId)) {
+        return;
+      }
+      const following = [...userInfo.following, targetUserId];
+      dispatch(asyncSetUserInfo({
+        firebaseApi,
+        userId,
+        userInfo: { ...userInfo, following: following }
+      }));
+    };
+    
+    export const handleUnfollow = (
+      firebaseApi: FirebaseApi,
+      userId: string,
+      targetUserId: string,
+    ): AppThunk => (dispatch, getState) => {
+      const userInfo = getState().user.userInfo.value;
+      if (userInfo == null) {
+        return;
+      }
+      if (!userInfo.following.includes(targetUserId)) {
+        return;
+      }
+      const following = userInfo.following.filter((fUserId) => {
+        return fUserId !== targetUserId;
+      });
+      dispatch(asyncSetUserInfo({
+        firebaseApi,
+        userId,
+        userInfo: { ...userInfo, following: following }
+      }));
+    };
+
 export default userSlice.reducer;
