@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Header from './components/Header';
 import Onboarding from './components/Onboarding';
 import MainFeed from './components/MainFeed';
+import ExploreFeed from './components/ExploreFeed';
 import { WithFirebaseApiProps, withFirebaseApi } from './Firebase';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { RootState } from './redux/store';
@@ -42,6 +43,7 @@ const Body = () => {
   return (
     <Routes>
       <Route path="/" element={<MainFeed />} />
+      <Route path="/explore" element={<ExploreFeed />} />
     </Routes>
   );
 };

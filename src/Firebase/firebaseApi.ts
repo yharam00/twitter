@@ -12,10 +12,25 @@ import {
     Unsubscribe,
     User
 } from "firebase/auth";
-import { addDoc, collection, doc, Firestore, getDoc, getDocs, getFirestore, orderBy, query, setDoc, where } from "firebase/firestore";
+import { addDoc, collection, doc, DocumentData, Firestore, getDoc, getDocs, getFirestore, orderBy, query, QuerySnapshot, setDoc, where } from "firebase/firestore";
 import { FirebaseStorage, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { Tweet, TweetWithId, UserInfo } from "../types";
     
+const getTweetsFromQuerySnapshot = (querySnapshot: QuerySnapshot<DocumentData>): Array<TweetWithId> => {
+    const tweets: Array<TweetWithId> = [];
+    const addTweet = (arr: Array<TweetWithId>, tweet: TweetWithId) => {
+      arr.push(tweet);
+    };
+    querySnapshot.forEach((doc) => {
+      addTweet(tweets, {
+        id: doc.id,
+        userId: doc.data().userId,
+        tweetContent: doc.data().tweetContent,
+        createdTime: doc.data().createdTime,
+      })
+    });
+    return tweets;
+  };
 
 export default class FirebaseApi {
     app: FirebaseApp;
@@ -96,19 +111,13 @@ export default class FirebaseApi {
         // TODO if following is >10 need to send multiple queries in parallel
         const userIdFilter = [userId, ...following];
         const q = query(collection(this.firestore, "tweets"), where("userId", "in", userIdFilter.slice(0, 10)), orderBy("createdTime", "desc"));
-        const tweets: Array<TweetWithId> = [];
-        const addTweet = (arr: Array<TweetWithId>, tweet: TweetWithId) => {
-          arr.push(tweet);
-        };
         const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          addTweet(tweets, {
-            id: doc.id,
-            userId: doc.data().userId,
-            tweetContent: doc.data().tweetContent,
-            createdTime: doc.data().createdTime,
-          })
-        });
-        return tweets;
+        return getTweetsFromQuerySnapshot(querySnapshot);
+    };
+  
+    asyncGetExploreFeed = async (): Promise<Array<TweetWithId>> => {
+      const q = query(collection(this.firestore, "tweets"), orderBy("createdTime", "desc"));
+      const querySnapshot = await getDocs(q);
+      return getTweetsFromQuerySnapshot(querySnapshot);
       };
 };
