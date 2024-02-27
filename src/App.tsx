@@ -26,7 +26,7 @@ const Body = () => {
   if (userId === null) {
     // logged out user
     return (<>
-      <Typography>haramy login app을 이용하기 위해 로그인이 필요합니다 🔒</Typography>
+      <Typography>haramy twitter app을 이용하기 위해 로그인이 필요합니다 🔒</Typography>
     </>);
   }
 
